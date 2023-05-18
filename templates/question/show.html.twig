@@ -3,28 +3,27 @@
 {% block title %}Question{% endblock %}
 
 {% block body %}
-    <h1>Question</h1>
-
-    <table class="table">
+<h1 class="text-5xl font-bold p-20">Question</h1>
+<div class="overflow-x-auto pl-20 pr-20 pb-20">
+    <table class="table table-zebra w-full shadow-xl">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ question.id }}</td>
+                <th class="px-4 py-2">Id</th>
+                <td class="px-4 py-2">{{ question.id }}</td>
             </tr>
             <tr>
-                <th>IdCategorie</th>
-                <td>{{ question.idCategorie }}</td>
+                <th class="px-4 py-2">IdCategorie</th>
+                <td class="px-4 py-2">{{ question.idCategorie }}</td>
             </tr>
             <tr>
-                <th>Question</th>
-                <td>{{ question.question }}</td>
+                <th class="px-4 py-2">Question</th>
+                <td class="px-4 py-2">{{ question.question }}</td>
             </tr>
         </tbody>
     </table>
+{{ include('question/_delete_form.html.twig') }}
+<a class="btn btn-outline btn-primary" href="{{ path('app_question_edit', {'id': question.id}) }}" class="text-blue-500">edit</a>
+</div>
+<a class="btn btn-outline btn-secondary" href="{{ path('app_question_index') }}" class="text-blue-500">back to list</a>
 
-    <a href="{{ path('app_question_index') }}">back to list</a>
-
-    <a href="{{ path('app_question_edit', {'id': question.id}) }}">edit</a>
-
-    {{ include('question/_delete_form.html.twig') }}
 {% endblock %}
