@@ -5,7 +5,11 @@ module.exports = {
     "./templates/**/*.html.twig",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'neon-blue': '#00FFFF',
+      },
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {
