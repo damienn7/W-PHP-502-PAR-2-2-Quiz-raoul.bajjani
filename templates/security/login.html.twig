@@ -14,15 +14,45 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+   <div class="hero min-h-screen bg-base-200">
+    <div class="hero-content flex-col lg:flex-row-reverse">
+        <div class="text-center lg:text-left">
+            <h1 class="text-5xl font-bold p-20">Login now!</h1>
+            {# <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p> #}
+        </div>
+        <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div class="card-body flex flex-col items-center">
+                <h1 class="h3 mb-3 font-bold">Please sign in</h1>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+                <form method="post">
+                    <div class="form-floating mb-3">
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control input input-bordered" autocomplete="email" required autofocus>
+                        <label for="inputEmail" class="label">
+                            <span class="label-text">Email</span>
+                        </label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="password" name="password" id="inputPassword" class="form-control input input-bordered" autocomplete="current-password" required>
+                        <label for="inputPassword" class="label">
+                            <span class="label-text">Password</span>
+                        </label>
+                        <label class="label">
+                            <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+                        </label>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <div class="">
+                        <button type="submit" class="btn btn-lg btn-primary">Sign In</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -35,8 +65,8 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
+    {# <button class="btn btn-lg btn-primary" type="submit">
         Sign in
-    </button>
+    </button> #}
 </form>
 {% endblock %}
