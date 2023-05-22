@@ -3,26 +3,30 @@
 {% block title %}Question index{% endblock %}
 
 {% block body %}
-    <h1>Question index</h1>
 
-    <table class="table">
-        <thead>
+<h1 class="text-5xl font-bold p-20">Question index</h1>
+    
+<div class="overflow-x-auto pl-20 pr-20 pb-20">
+  <table class="table table-zebra w-full shadow-xl">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Id Categorie</th>
+        <th>Question</th>
+        <th>actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- row generated -->
+      {% for question in questions %}
             <tr>
-                <th>Id</th>
-                <th>IdCategorie</th>
-                <th>Question</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for question in questions %}
-            <tr>
-                <td>{{ question.id }}</td>
+                <th>{{ question.id }}</th>
                 <td>{{ question.idCategorie }}</td>
                 <td>{{ question.question }}</td>
                 <td>
-                    <a href="{{ path('app_question_show', {'id': question.id}) }}">show</a>
-                    <a href="{{ path('app_question_edit', {'id': question.id}) }}">edit</a>
+                    <a class="btn btn-outline btn-primary" href="{{ path('app_question_show', {'id': question.id}) }}">show</a>
+                    <a class="btn btn-outline btn-secondary" href="{{ path('app_question_edit', {'id': question.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -30,8 +34,8 @@
                 <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_question_new') }}">Create new</a>
+    </tbody>
+  </table>
+</div>
+<a href="{{ path('app_question_new') }}">Create new</a>
 {% endblock %}
