@@ -5,14 +5,19 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements PasswordAuthenticatedUserInterface
-{ 
+class User implements UserInterface, PasswordAuthenticatedUserInterface
+{
+
+
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -51,7 +56,13 @@ class User implements PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->reponses = new ArrayCollection();
-        $this->roles = ['ROLE_USER'];
+        $date = new \DateTimeImmutable();
+        $this->setCreatedAt($date);
+        $this->setUpdatedAt($date);
+        $this->setRoles(['ROLE_USER']);
+        $this->setIsActive(0);
+        $this->setIsAdmin(0);
+        $this->setIsVerified(0);
     }
 
     public function getId(): ?int
@@ -189,5 +200,35 @@ class User implements PasswordAuthenticatedUserInterface
         $this->reponses->removeElement($reponse);
 
         return $this;
+    }
+
+    /**
+     * Returning a salt is only needed if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    /**
+     * The public representation of the user (e.g. a username, an email address, etc.)
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
     }
 }

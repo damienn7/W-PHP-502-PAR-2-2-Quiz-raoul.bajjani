@@ -16,7 +16,7 @@ class Question
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'questions')]
-    private ?Categorie $id_categorie = null;
+    private ?Categorie $categorie = null;
 
     #[ORM\Column(length: 255)]
     private ?string $question = null;
@@ -34,14 +34,14 @@ class Question
         return $this->id;
     }
 
-    public function getIdCategorie(): ?Categorie
+    public function getCategorie(): ?Categorie
     {
-        return $this->id_categorie;
+        return $this->categorie;
     }
 
-    public function setIdCategorie(?Categorie $id_categorie): self
+    public function setIdCategorie(?Categorie $categorie): self
     {
-        $this->id_categorie = $id_categorie;
+        $this->categorie = $categorie;
 
         return $this;
     }
@@ -70,7 +70,7 @@ class Question
     {
         if (!$this->reponses->contains($reponse)) {
             $this->reponses->add($reponse);
-            $reponse->setIdQuestion($this);
+            $reponse->setQuestion($this);
         }
 
         return $this;
@@ -80,8 +80,8 @@ class Question
     {
         if ($this->reponses->removeElement($reponse)) {
             // set the owning side to null (unless already changed)
-            if ($reponse->getIdQuestion() === $this) {
-                $reponse->setIdQuestion(null);
+            if ($reponse->getQuestion() === $this) {
+                $reponse->setQuestion(null);
             }
         }
 
