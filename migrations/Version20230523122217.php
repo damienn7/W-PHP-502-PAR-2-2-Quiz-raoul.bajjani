@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230523105043 extends AbstractMigration
+final class Version20230523122217 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,7 +20,7 @@ final class Version20230523105043 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE user CHANGE username username VARCHAR(255) NOT NULL, CHANGE created_at created_at DATETIME NOT NULL, CHANGE updated_at updated_at DATETIME NOT NULL, CHANGE is_active is_active TINYINT(1) NOT NULL, CHANGE is_admin is_admin TINYINT(1) NOT NULL, CHANGE roles roles LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', CHANGE is_verified is_verified TINYINT(1) NOT NULL');
+        $this->addSql('ALTER TABLE user CHANGE username username VARCHAR(255) default NULL, CHANGE created_at created_at DATETIME NOT NULL, CHANGE updated_at updated_at DATETIME NOT NULL default CURRENT_TIMESTAMP, CHANGE is_active is_active TINYINT(1) NOT NULL default CURRENT_TIMESTAMP, CHANGE is_admin is_admin TINYINT(1) NOT NULL, CHANGE roles roles LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', CHANGE is_verified is_verified TINYINT(1) NOT NULL');
     }
 
     public function down(Schema $schema): void

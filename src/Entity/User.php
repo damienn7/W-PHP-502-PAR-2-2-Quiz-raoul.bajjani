@@ -2,113 +2,71 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
-
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Query\AST\Functions\CurrentDateFunction;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * User
- *
- * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="email", columns={"email"})})
- * @ORM\Entity
- */ 
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+class User
 {
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $email = null;
 
-    public function __construct(){
-        $date = new \DateTime();
-        // $date = $date->format("d-m-y h-i-s");
-        $this->setCreatedAt($date);
+    #[ORM\Column(length: 255)]
+    private ?string $password = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $username = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $created_at = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updated_at = null;
+
+    #[ORM\Column]
+    private ?bool $is_active = null;
+
+    #[ORM\Column]
+    private ?bool $is_admin = null;
+
+    #[ORM\Column]
+    private ?bool $is_verified = null;
+
+    #[ORM\Column(type: Types::ARRAY)]
+    private array $roles = [];
+
+    #[ORM\ManyToMany(targetEntity: Reponse::class, inversedBy: 'users')]
+    private Collection $reponses;
+
+    public function __construct()
+    {
+        $this->reponses = new ArrayCollection();
     }
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
-     */
-    private $email;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
-     */
-    private $password;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=255, nullable=false)
-     */
-    private $username;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
-     */
-    private $updatedAt;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_active", type="boolean", nullable=false)
-     */
-    private $isActive = '0';
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_admin", type="boolean", nullable=false)
-     */
-    private $isAdmin = '0';
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="roles", type="array", nullable=false)
-     */
-    private $roles = [];
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_verified", type="boolean", nullable=false)
-     */
-    private $isVerified = false;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
 
     public function getPassword(): ?string
     {
@@ -127,93 +85,76 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->username;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(?string $username): self
     {
         $this->username = $username;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->createdAt;
+        return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(\DateTimeImmutable $created_at): self
     {
-        $this->createdAt = $createdAt;
+        $this->created_at = $created_at;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
-        return $this->updatedAt;
+        return $this->updated_at;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(\DateTimeImmutable $updated_at): self
     {
-        $this->updatedAt = $updatedAt;
+        $this->updated_at = $updated_at;
 
         return $this;
     }
 
     public function isIsActive(): ?bool
     {
-        return $this->isActive;
+        return $this->is_active;
     }
 
-    public function setIsActive(bool $isActive): self
+    public function setIsActive(bool $is_active): self
     {
-        $this->isActive = $isActive;
+        $this->is_active = $is_active;
 
         return $this;
     }
 
     public function isIsAdmin(): ?bool
     {
-        return $this->isAdmin;
+        return $this->is_admin;
     }
 
-    public function setIsAdmin(bool $isAdmin): self
+    public function setIsAdmin(bool $is_admin): self
     {
-        $this->isAdmin = $isAdmin;
+        $this->is_admin = $is_admin;
 
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function isIsVerified(): ?bool
     {
-        return $this->email;
+        return $this->is_verified;
     }
 
-    public function setEmail(string $email): self
+    public function setIsVerified(bool $is_verified): self
     {
-        $this->email = $email;
+        $this->is_verified = $is_verified;
 
         return $this;
     }
 
-    /**
-     * The public representation of the user (e.g. a username, an email address, etc.)
-     *
-     * @see UserInterface
-     */
-    public function getUserIdentifier(): string
-    {
-        return (string) $this->email;
-    }
-
-    /**
-     * @see UserInterface
-     */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return $this->roles;
     }
 
     public function setRoles(array $roles): self
@@ -223,38 +164,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-
     /**
-     * Returning a salt is only needed if you are not using a modern
-     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
-     *
-     * @see UserInterface
+     * @return Collection<int, Reponse>
      */
-    public function getSalt(): ?string
+    public function getReponses(): Collection
     {
-        return null;
+        return $this->reponses;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
+    public function addReponse(Reponse $reponse): self
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
-    }
-
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
-
-    public function setIsVerified(bool $isVerified): self
-    {
-        $this->isVerified = $isVerified;
+        if (!$this->reponses->contains($reponse)) {
+            $this->reponses->add($reponse);
+        }
 
         return $this;
     }
 
+    public function removeReponse(Reponse $reponse): self
+    {
+        $this->reponses->removeElement($reponse);
 
+        return $this;
+    }
 }
