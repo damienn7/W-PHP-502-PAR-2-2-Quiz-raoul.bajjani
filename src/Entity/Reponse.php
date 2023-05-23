@@ -2,59 +2,50 @@
 
 namespace App\Entity;
 
+use App\Repository\ReponseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Reponse
- *
- * @ORM\Table(name="reponse")
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: ReponseRepository::class)]
 class Reponse
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="id_question", type="integer", nullable=true)
-     */
-    private $idQuestion;
+    #[ORM\ManyToOne(inversedBy: 'reponses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Question $id_question = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="reponse", type="string", length=255, nullable=true)
-     */
-    private $reponse;
+    #[ORM\Column(length: 255)]
+    private ?string $reponse = null;
 
-    /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="reponse_expected", type="boolean", nullable=true)
-     */
-    private $reponseExpected;
+    #[ORM\Column]
+    private ?int $reponse_expected = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'reponses')]
+    private Collection $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdQuestion(): ?int
+    public function getIdQuestion(): ?Question
     {
-        return $this->idQuestion;
+        return $this->id_question;
     }
 
-    public function setIdQuestion(?int $idQuestion): self
+    public function setIdQuestion(?Question $id_question): self
     {
-        $this->idQuestion = $idQuestion;
+        $this->id_question = $id_question;
 
         return $this;
     }
@@ -64,24 +55,49 @@ class Reponse
         return $this->reponse;
     }
 
-    public function setReponse(?string $reponse): self
+    public function setReponse(string $reponse): self
     {
         $this->reponse = $reponse;
 
         return $this;
     }
 
-    public function isReponseExpected(): ?bool
+    public function getReponseExpected(): ?int
     {
-        return $this->reponseExpected;
+        return $this->reponse_expected;
     }
 
-    public function setReponseExpected(?bool $reponseExpected): self
+    public function setReponseExpected(int $reponse_expected): self
     {
-        $this->reponseExpected = $reponseExpected;
+        $this->reponse_expected = $reponse_expected;
 
         return $this;
     }
 
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
 
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addReponse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeReponse($this);
+        }
+
+        return $this;
+    }
 }
