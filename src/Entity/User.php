@@ -23,9 +23,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     public function __construct(){
-        $date = new \DateTime();
+        $date = new \DateTimeImmutable();
         // $date = $date->format("d-m-y h-i-s");
         $this->setCreatedAt($date);
+        $this->setUpdatedAt($date);
+        $this->roles = ['ROLE_USER'];
     }
 
     /**
