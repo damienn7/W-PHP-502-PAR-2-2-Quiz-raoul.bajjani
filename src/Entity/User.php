@@ -6,6 +6,7 @@ use Doctrine\DBAL\Types\Types;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Query\AST\Functions\CurrentDateFunction;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -19,6 +20,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
+
+    public function __construct(){
+        $date = new \DateTime();
+        // $date = $date->format("d-m-y h-i-s");
+        $this->setCreatedAt($date);
+    }
+
     /**
      * @var int
      *
@@ -45,7 +54,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=255, nullable=true)
+     * @ORM\Column(name="username", type="string", length=255, nullable=false)
      */
     private $username;
 
