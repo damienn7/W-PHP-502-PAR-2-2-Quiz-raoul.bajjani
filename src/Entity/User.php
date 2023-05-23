@@ -45,7 +45,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=255, nullable=false)
+     * @ORM\Column(name="username", type="string", length=255, nullable=true)
      */
     private $username;
 
@@ -59,7 +59,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
     private $updatedAt;
 
@@ -80,11 +80,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var array
      *
-     * @ORM\Column(name="roles", type="array", nullable=true)
+     * @ORM\Column(name="roles", type="array", nullable=false)
      */
     private $roles = [];
 
-    #[ORM\Column(type: 'boolean')]
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_verified", type="boolean", nullable=false)
+     */
     private $isVerified = false;
 
     public function getId(): ?int
