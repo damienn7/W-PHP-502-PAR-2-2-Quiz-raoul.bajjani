@@ -1,72 +1,103 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}
+    Log in!
+{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <form method="post" style="position:relative;">
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
 
-   <div class="hero min-h-screen bg-base-200">
-    <div class="hero-content flex-col lg:flex-row-reverse">
-        <div class="text-center lg:text-left">
-            <h1 class="text-5xl font-bold p-20 text-neon-blue">Login now!</h1>
-            {# <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p> #}
-        </div>
-        <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <div class="card-body flex flex-col items-center">
-                <h1 class="h3 mb-3 font-bold text-neon-blue">Please sign in</h1>
-
-                <form method="post">
-                    <div class="form-floating mb-3">
-                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control input input-bordered" autocomplete="email" required autofocus>
-                        <label for="inputEmail" class="label">
-                            <span class="label-text">Email</span>
-                        </label>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <input type="password" name="password" id="inputPassword" class="form-control input input-bordered" autocomplete="current-password" required>
-                        <label for="inputPassword" class="label">
-                            <span class="label-text">Password</span>
-                        </label>
-                        <label class="label">
-                            <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
-                        </label>
-                    </div>
-
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-                    <div class="">
-                        <button type="submit" class="btn btn-lg btn-primary">Sign In</button>
-                    </div>
-                </form>
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as 
+                {{ app.user.userIdentifier }}
+                , 
+                <a href="{{ path('app_logout') }}">
+                    Logout
+                </a>
             </div>
-        </div>
-    </div>
-</div>
+        {% endif %}
 
+        <div class="hero min-h-screen bg-base-200">
+            <div class="hero-content flex-col lg:flex-row-reverse">
+                <div class="text-center lg:text-left">
+                    <h1 class="text-5xl font-bold p-20 text-neon-blue">
+                        Login now!
+                    </h1>
+                {# <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p> #}
+                </div>
+                <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 p-2">
+                    <div class="card-body flex flex-col items-center p-10">
+                    {% if error %}
+                    <div class="p-2 bg-red-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert" style="position:absolute;top:0;">
+                        <span class="flex rounded-full bg-red-500 uppercase px-2 py-1 text-xs font-bold mr-3">
+                            Error
+                              
+                        </span>
+                        <span class="font-semibold mr-2 text-left flex-auto">
+                            {{ error.messageKey|trans(error.messageData, 'security') }}
+                        </span>
+                        <svg class="fill-current opacity-75 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z" />
+                        </svg>
+                    </div>
+                {% endif %}
+                        <h1 class="h3 mb-3 font-bold text-neon-blue">
+                            Please sign in
+                        </h1>
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
+                        <form method="post">
+                            <div class="form-floating mb-3">
+                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control input input-bordered" autocomplete="email" required autofocus>
+                                    <label for="inputEmail" class="label">
+                                        <span class="label-text">
+                                            Email
+                                        </span>
+                                    </label>
+                                </div>
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
+                                <div class="form-floating mb-3">
+                                    <input type="password" name="password" id="inputPassword" class="form-control input input-bordered" autocomplete="current-password" required>
+                                        <label for="inputPassword" class="label">
+                                            <span class="label-text">
+                                                Password
+                                            </span>
+                                        </label>
+                                        <label class="label">
+                                            <a href="#" class="label-text-alt link link-hover">
+                                                Forgot password?
+                                            </a>
+                                        </label>
+                                    </div>
 
-    {# <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button> #}
-</form>
-{% endblock %}
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                                        <div class="">
+                                            <button type="submit" class="btn btn-lg btn-primary">
+                                                Sign In
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                {#
+                        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                        See https://symfony.com/doc/current/security/remember_me.html
+                
+                        <div class="checkbox mb-3">
+                            <label>
+                                <input type="checkbox" name="_remember_me"> Remember me
+                            </label>
+                        </div>
+                    #}
+
+                {# <button class="btn btn-lg btn-primary" type="submit">
+                        Sign in
+                    </button> #}
+                </form>
+            {% endblock %}
+            

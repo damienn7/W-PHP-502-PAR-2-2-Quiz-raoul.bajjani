@@ -15,11 +15,11 @@ security:
         main:
             lazy: true
             provider: our_db_provider
-            form_login:
-                # "app_login" is the name of the route created previously
-                login_path: app_login
-                check_path: app_login
-                enable_csrf: true
+            # form_login:
+            #     # "app_login" is the name of the route created previously
+            #     login_path: app_login
+            #     check_path: app_login
+            #     enable_csrf: true
             custom_authenticator:
                 - App\Security\AuthentificationAuthenticator
 
