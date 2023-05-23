@@ -49,6 +49,7 @@ class User
     public function __construct()
     {
         $this->reponses = new ArrayCollection();
+        $this->roles = ['ROLE_USER'];
     }
 
     public function getId(): ?int
