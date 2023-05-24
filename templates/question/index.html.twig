@@ -22,7 +22,7 @@
       {% for question in questions %}
             <tr>
                 <th>{{ question.id }}</th>
-                <td>{{ question.idCategorie }}</td>
+                <td>{{ question.categorie.id }}</td>
                 <td>{{ question.question }}</td>
                 <td>
                     <a class="btn btn-outline btn-primary" href="{{ path('app_question_show', {'id': question.id}) }}">show</a>
