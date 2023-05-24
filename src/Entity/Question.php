@@ -21,7 +21,7 @@ class Question
     #[ORM\Column(length: 255)]
     private ?string $question = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_question', targetEntity: Reponse::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'question', targetEntity: Reponse::class, orphanRemoval: true)]
     private Collection $reponses;
 
     public function __construct()
@@ -39,7 +39,7 @@ class Question
         return $this->categorie;
     }
 
-    public function setIdCategorie(?Categorie $categorie): self
+    public function setCategorie(?Categorie $categorie): self
     {
         $this->categorie = $categorie;
 

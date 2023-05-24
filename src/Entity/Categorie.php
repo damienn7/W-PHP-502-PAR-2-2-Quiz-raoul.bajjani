@@ -18,7 +18,7 @@ class Categorie
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_categorie', targetEntity: Question::class)]
+    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Question::class)]
     private Collection $questions;
 
     public function __construct()
@@ -55,7 +55,7 @@ class Categorie
     {
         if (!$this->questions->contains($question)) {
             $this->questions->add($question);
-            $question->setIdCategorie($this);
+            $question->setCategorie($this);
         }
 
         return $this;
@@ -65,8 +65,8 @@ class Categorie
     {
         if ($this->questions->removeElement($question)) {
             // set the owning side to null (unless already changed)
-            if ($question->getIdCategorie() === $this) {
-                $question->setIdCategorie(null);
+            if ($question->getCategorie() === $this) {
+                $question->setCategorie(null);
             }
         }
 

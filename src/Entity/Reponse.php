@@ -97,7 +97,6 @@ class Reponse
         if ($this->users->removeElement($user)) {
             $user->removeReponse($this);
         }
-
         return $this;
     }
 }
