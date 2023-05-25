@@ -2,16 +2,23 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use App\Repository\ReponseRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReponseRepository::class)]
 class Reponse
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reponses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Question $question = null;
 
     #[ORM\Column(length: 255)]
     private ?string $reponse = null;
@@ -19,8 +26,13 @@ class Reponse
     #[ORM\Column]
     private ?int $reponse_expected = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reponses')]
-    private ?Question $question = null;
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'reponses')]
+    private Collection $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -58,6 +70,21 @@ class Reponse
 
     public function setQuestion(?question $question): self
     {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
         if (!$this->users->contains($user)) {
             $this->users->add($user);
             $user->addReponse($this);
@@ -65,14 +92,11 @@ class Reponse
 
         return $this;
     }
-
     public function removeUser(User $user): self
     {
         if ($this->users->removeElement($user)) {
             $user->removeReponse($this);
         }
-        $this->question = $question;
-
         return $this;
     }
 }

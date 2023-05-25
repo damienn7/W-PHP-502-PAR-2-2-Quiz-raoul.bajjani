@@ -47,6 +47,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::ARRAY)]
     private array $roles = [];
 
+    #[ORM\ManyToMany(targetEntity: Reponse::class, inversedBy: 'users')]
+    private Collection $reponses;
     public function __construct()
     {
         $date = new \DateTimeImmutable();
@@ -167,6 +169,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function addReponse(Reponse $reponse): self
+    {
+        if (!$this->reponses->contains($reponse)) {
+            $this->reponses->add($reponse);
+        }
+
+        return $this;
+    }
+
+    public function removeReponse(Reponse $reponse): self
+    {
+        $this->reponses->removeElement($reponse);
 
         return $this;
     }

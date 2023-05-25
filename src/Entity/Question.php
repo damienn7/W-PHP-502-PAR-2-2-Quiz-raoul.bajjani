@@ -18,13 +18,14 @@ class Question
     #[ORM\Column(length: 255)]
     private ?string $question = null;
 
-<<<<<<< HEAD
+
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: Reponse::class, orphanRemoval: true)]
-=======
+    private Collection $reponses;
+
+
     #[ORM\ManyToOne(inversedBy: 'questions')]
     private ?Categorie $categorie = null;
 
-    private Collection $reponses;
 
     public function __construct()
     {
@@ -90,9 +91,7 @@ class Question
         return $this;
     }
 
-<<<<<<< HEAD
-    public function __toString()
-=======
+
     public function __toString(): string
     {
         return $this->getQuestion();
