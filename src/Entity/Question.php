@@ -15,13 +15,15 @@ class Question
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'questions')]
-    private ?Categorie $categorie = null;
-
     #[ORM\Column(length: 255)]
     private ?string $question = null;
 
+<<<<<<< HEAD
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: Reponse::class, orphanRemoval: true)]
+=======
+    #[ORM\ManyToOne(inversedBy: 'questions')]
+    private ?Categorie $categorie = null;
+
     private Collection $reponses;
 
     public function __construct()
@@ -34,18 +36,6 @@ class Question
         return $this->id;
     }
 
-    public function getCategorie(): ?Categorie
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(?Categorie $categorie): self
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
-
     public function getQuestion(): ?string
     {
         return $this->question;
@@ -54,6 +44,18 @@ class Question
     public function setQuestion(string $question): self
     {
         $this->question = $question;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }
@@ -88,7 +90,10 @@ class Question
         return $this;
     }
 
+<<<<<<< HEAD
     public function __toString()
+=======
+    public function __toString(): string
     {
         return $this->getQuestion();
     }
