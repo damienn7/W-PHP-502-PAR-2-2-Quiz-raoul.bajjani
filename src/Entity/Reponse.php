@@ -20,7 +20,7 @@ class Reponse
     private ?int $reponse_expected = null;
 
     #[ORM\ManyToOne(inversedBy: 'reponses')]
-    private ?question $question = null;
+    private ?Question $question = null;
 
     public function getId(): ?int
     {
