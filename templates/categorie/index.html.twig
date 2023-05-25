@@ -3,8 +3,9 @@
 {% block title %}Categorie index{% endblock %}
 
 {% block body %}
-    <h1>Categorie index</h1>
-
+    <h1 class="text-5xl font-bold p-20">Categorie index</h1>
+<div class="overflow-x-auto pl-20 pr-20 pb-20">
+  <table class="table table-zebra w-full shadow-xl">
     <table class="table">
         <thead>
             <tr>
@@ -19,8 +20,8 @@
                 <td>{{ categorie.id }}</td>
                 <td>{{ categorie.name }}</td>
                 <td>
-                    <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}">show</a>
-                    <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">edit</a>
+                    <a class="btn btn-outline btn-primary" href="{{ path('app_categorie_show', {'id': categorie.id}) }}">show</a>
+                    <a class="btn btn-outline btn-secondary" href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -30,6 +31,8 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_categorie_new') }}">Create new</a>
+    </table>
+    <a class="btn btn-outline btn-primary" href="{{ path('app_categorie_new') }}">Create new</a>
+</div>
 {% endblock %}
+
