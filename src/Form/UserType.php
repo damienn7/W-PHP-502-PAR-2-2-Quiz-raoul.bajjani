@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class UserType extends AbstractType
 {
@@ -15,7 +16,9 @@ class UserType extends AbstractType
             ->add('email')
             ->add('password')
             ->add('username')
-            ->add('updatedAt')
+            ->add('updatedAt', DateTimeType::class, array(
+                'input' => 'datetime_immutable',
+            ))
             ->add('isActive')
             ->add('isAdmin')
         ;

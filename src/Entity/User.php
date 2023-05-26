@@ -49,7 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToMany(targetEntity: Reponse::class, inversedBy: 'users')]
     private Collection $reponses;
-    public function __construct()
+    public function __construct() 
     {
         $date = new \DateTimeImmutable();
         $this->setCreatedAt($date);
@@ -217,5 +217,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
+    }
+
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
     }
 }
