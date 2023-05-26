@@ -3,11 +3,25 @@
 {% block title %}Edit Reponse{% endblock %}
 
 {% block body %}
-    <h1>Edit Reponse</h1>
-
-    {{ include('reponse/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_reponse_index') }}">back to list</a>
-
-    {{ include('reponse/_delete_form.html.twig') }}
+    <h1 class="text-5xl font-bold p-20">Edit Reponse</h1>
+    <div class="overflow-x-auto pl-20 pr-20 pb-20">
+        <table class="table table-zebra w-full shadow-xl">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2">Reponse</th>
+                    <th class="px-4 py-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="px-4 py-2">{{ include('reponse/_form.html.twig', {'button_label': 'Update'}) }}</td>
+                    <td class="px-4 py-2">
+                        <a href="{{ path('app_reponse_index') }}" class="btn btn-outline btn-primary">back to list</a>
+                        {{ include('reponse/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
+

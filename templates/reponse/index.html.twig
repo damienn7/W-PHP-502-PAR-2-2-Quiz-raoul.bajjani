@@ -3,8 +3,11 @@
 {% block title %}Reponse index{% endblock %}
 
 {% block body %}
-    <h1>Reponse index</h1>
 
+<h1 class="text-5xl font-bold p-20">Reponse index</h1>
+    
+<div class="overflow-x-auto pl-20 pr-20 pb-20">
+  <table class="table table-zebra w-full shadow-xl">
     <table class="table">
         <thead>
             <tr>
@@ -23,8 +26,8 @@
                 <td>{{ reponse.reponse }}</td>
                 <td>{{ reponse.reponseExpected ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_reponse_show', {'id': reponse.id}) }}">show</a>
-                    <a href="{{ path('app_reponse_edit', {'id': reponse.id}) }}">edit</a>
+                    <a class="btn btn-outline btn-primary" href="{{ path('app_reponse_show', {'id': reponse.id}) }}">show</a>
+                    <a class="btn btn-outline btn-secondary" href="{{ path('app_reponse_edit', {'id': reponse.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -34,6 +37,6 @@
         {% endfor %}
         </tbody>
     </table>
-
+</div>
     <a href="{{ path('app_reponse_new') }}">Create new</a>
 {% endblock %}
