@@ -1,29 +1,80 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Question{% endblock %}
+{% block title %}
+    Question
+            
+        
+    
+{% endblock %}
 
 {% block body %}
-<h1 class="text-5xl font-bold p-20">Question</h1>
-<div class="overflow-x-auto pl-20 pr-20 pb-20">
-    <table class="table table-zebra w-full shadow-xl">
-        <tbody>
-            <tr>
-                <th class="px-4 py-2">Id</th>
-                <td class="px-4 py-2">{{ question.id }}</td>
-            </tr>
-            <tr>
-                <th class="px-4 py-2">Categorie</th>
-                <td class="px-4 py-2">{{ question.categorie }}</td>
-            </tr>
-            <tr>
-                <th class="px-4 py-2">Question</th>
-                <td class="px-4 py-2">{{ question.question }}</td>
-            </tr>
-        </tbody>
-    </table>
-{{ include('question/_delete_form.html.twig') }}
-<a class="btn btn-outline btn-primary" href="{{ path('app_question_edit', {'id': question.id}) }}" class="text-blue-500">edit</a>
-</div>
-<a class="btn btn-outline btn-secondary" href="{{ path('app_question_index') }}" class="text-blue-500">back to list</a>
+    <h1 class="text-5xl font-bold p-20">
+        Question
+                            
+                    
+            
+    </h1>
+    <div class="overflow-x-auto pl-20 pr-20 pb-20">
+        <table class="table table-zebra w-full shadow-xl">
+            <tbody>
+                <tr>
+                    <th class="px-4 py-2">
+                        Id
+                                                                                            
+                                                                    
+                                            
+                    </th>
+                    <td class="px-4 py-2">
+                        {{ question.id }}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="px-4 py-2">
+                        Categorie
+                                                                                            
+                                                                    
+                                            
+                    </th>
+                    <td class="px-4 py-2">
+                        {{ question.categorie }}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="px-4 py-2">
+                        Question
+                                                                                            
+                                                                    
+                                            
+                    </th>
+                    <td class="px-4 py-2">
+                        {{ question.question }}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="px-4 py-2">
+                        Actions
+                                                                                            
+                                                                    
+                                            
+                    </th>
+                    <td class="px-4 py-2" style="display:flex;flex-direction:row;justify-content:space-between;">
+                        {{ include('question/_delete_form.html.twig') }}
 
-{% endblock %}
+                        <a class="btn btn-outline btn-primary" href="{{ path('app_question_edit', {'id': question.id}) }}" class="text-blue-500">
+                            edit
+                                                                        
+                                                    
+                        </a>
+
+                        <a class="btn btn-outline btn-secondary" href="{{ path('app_question_index') }}" class="text-blue-500">
+                            back to list       
+                                            
+                        </a>
+                    </td>
+                </tbody>
+            </table>
+
+        </div>
+
+    {% endblock %}
+    

@@ -22,6 +22,25 @@ class UserController extends AbstractController
 
         return $this->render('user/index.html.twig', [
             'users' => $users,
+            'items' => [[
+                'route' => 'app_question_index',
+                'title' => 'Question'
+            ],[
+                'route' => 'app_categorie_index',
+                'title' => 'Category'
+            ],[
+                'route' => 'app_reponse_index',
+                'title' => 'Answer'
+            ],[
+                'route' => 'app_user_index',
+                'title' => 'User'
+            ],[
+                'route' => 'app_quizz_index',
+                'title' => 'Quizz'
+            ],[
+                'route' => 'app_logout',
+                'title' => 'Logout'
+            ]],
         ]);
     }
 
@@ -42,6 +61,25 @@ class UserController extends AbstractController
         return $this->renderForm('user/new.html.twig', [
             'user' => $user,
             'form' => $form,
+            'items' => [[
+                'route' => 'app_question_index',
+                'title' => 'Question'
+            ],[
+                'route' => 'app_categorie_index',
+                'title' => 'Category'
+            ],[
+                'route' => 'app_reponse_index',
+                'title' => 'Answer'
+            ],[
+                'route' => 'app_user_index',
+                'title' => 'User'
+            ],[
+                'route' => 'app_quizz_index',
+                'title' => 'Quizz'
+            ],[
+                'route' => 'app_logout',
+                'title' => 'Logout'
+            ]],
         ]);
     }
 
@@ -50,6 +88,25 @@ class UserController extends AbstractController
     {
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'items' => [[
+                'route' => 'app_question_index',
+                'title' => 'Question'
+            ],[
+                'route' => 'app_categorie_index',
+                'title' => 'Category'
+            ],[
+                'route' => 'app_reponse_index',
+                'title' => 'Answer'
+            ],[
+                'route' => 'app_user_index',
+                'title' => 'User'
+            ],[
+                'route' => 'app_quizz_index',
+                'title' => 'Quizz'
+            ],[
+                'route' => 'app_logout',
+                'title' => 'Logout'
+            ]],
         ]);
     }
 
@@ -68,6 +125,25 @@ class UserController extends AbstractController
         return $this->renderForm('user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
+            'items' => [[
+                'route' => 'app_question',
+                'title' => 'Question'
+            ],[
+                'route' => 'app_categorie_index',
+                'title' => 'Category'
+            ],[
+                'route' => 'app_reponse_index',
+                'title' => 'Answer'
+            ],[
+                'route' => 'app_user_index',
+                'title' => 'User'
+            ],[
+                'route' => 'app_quizz_index',
+                'title' => 'Quizz'
+            ],[
+                'route' => 'app_logout',
+                'title' => 'Logout'
+            ]],
         ]);
     }
 

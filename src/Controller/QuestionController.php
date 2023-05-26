@@ -18,6 +18,25 @@ class QuestionController extends AbstractController
     {
         return $this->render('question/index.html.twig', [
             'questions' => $questionRepository->findAll(),
+            'items' => [[
+                'route' => 'app_question_index',
+                'title' => 'Question'
+            ],[
+                'route' => 'app_categorie_index',
+                'title' => 'Category'
+            ],[
+                'route' => 'app_reponse_index',
+                'title' => 'Answer'
+            ],[
+                'route' => 'app_user_index',
+                'title' => 'User'
+            ],[
+                'route' => 'app_quizz_index',
+                'title' => 'Quizz'
+            ],[
+                'route' => 'app_logout',
+                'title' => 'Logout'
+            ]],
         ]);
     }
 
@@ -37,6 +56,25 @@ class QuestionController extends AbstractController
         return $this->renderForm('question/new.html.twig', [
             'question' => $question,
             'form' => $form,
+            'items' => [[
+                'route' => 'app_question_index',
+                'title' => 'Question'
+            ],[
+                'route' => 'app_categorie_index',
+                'title' => 'Category'
+            ],[
+                'route' => 'app_reponse_index',
+                'title' => 'Answer'
+            ],[
+                'route' => 'app_user_index',
+                'title' => 'User'
+            ],[
+                'route' => 'app_quizz_index',
+                'title' => 'Quizz'
+            ],[
+                'route' => 'app_logout',
+                'title' => 'Logout'
+            ]],
         ]);
     }
 
@@ -45,6 +83,25 @@ class QuestionController extends AbstractController
     {
         return $this->render('question/show.html.twig', [
             'question' => $question,
+            'items' => [[
+                'route' => 'app_question_index',
+                'title' => 'Question'
+            ],[
+                'route' => 'app_categorie_index',
+                'title' => 'Category'
+            ],[
+                'route' => 'app_reponse_index',
+                'title' => 'Answer'
+            ],[
+                'route' => 'app_user_index',
+                'title' => 'User'
+            ],[
+                'route' => 'app_quizz_index',
+                'title' => 'Quizz'
+            ],[
+                'route' => 'app_logout',
+                'title' => 'Logout'
+            ]],
         ]);
     }
 
@@ -63,6 +120,25 @@ class QuestionController extends AbstractController
         return $this->renderForm('question/edit.html.twig', [
             'question' => $question,
             'form' => $form,
+            'items' => [[
+                'route' => 'app_question_index',
+                'title' => 'Question'
+            ],[
+                'route' => 'app_categorie_index',
+                'title' => 'Category'
+            ],[
+                'route' => 'app_reponse_index',
+                'title' => 'Answer'
+            ],[
+                'route' => 'app_user_index',
+                'title' => 'User'
+            ],[
+                'route' => 'app_quizz_index',
+                'title' => 'Quizz'
+            ],[
+                'route' => 'app_logout',
+                'title' => 'Logout'
+            ]],
         ]);
     }
 
