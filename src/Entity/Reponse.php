@@ -29,6 +29,12 @@ class Reponse
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'reponses')]
     private Collection $users;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $date_responded = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reponse')]
+    private ?History $history = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -97,6 +103,30 @@ class Reponse
         if ($this->users->removeElement($user)) {
             $user->removeReponse($this);
         }
+        return $this;
+    }
+
+    public function getDateResponded(): ?\DateTimeImmutable
+    {
+        return $this->date_responded;
+    }
+
+    public function setDateResponded(?\DateTimeImmutable $date_responded): self
+    {
+        $this->date_responded = $date_responded;
+
+        return $this;
+    }
+
+    public function getHistory(): ?History
+    {
+        return $this->history;
+    }
+
+    public function setHistory(?History $history): self
+    {
+        $this->history = $history;
+
         return $this;
     }
 
