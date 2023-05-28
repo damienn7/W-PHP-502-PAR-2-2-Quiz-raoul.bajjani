@@ -58,6 +58,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->setIsActive(0);
         $this->setIsAdmin(0);
         $this->setIsVerified(0);
+        $this->reponses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -218,6 +219,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return (string) $this->email;
     }
+
+    /**
+     * @return Collection<int, Reponse>
+     */
+    public function getReponses(): Collection
+    {
+        return $this->reponses;
+    }
+
+
 
 
  

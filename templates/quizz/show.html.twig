@@ -11,20 +11,188 @@
     <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    body{
+        background-attachment: scroll;
+        overflow-y:hidden;
+    }
+
+    .categorie{
+        top:40%;
+        width:100%;
+        height:100%;
+        position:absolute;
+        padding:30px;
+        z-index:0;
+        backdrop-filter:blur(4px);
+        border-radius:20px;
+}
+
+.index{
+        top:-70px;
+        width:100%;
+        height:100vh;
+        position:absolute;
+        /* overflow:scroll; */
+}
+
+.container{
+
+        z-index:1000;
+        filter:none;
+        border-radius:20px;
+}
+
+.popup{
+  position:absolute;
+  top:0;
+  z-index:3;
+  opacity:0.9;
+  right:10px;
+}
+
+.nav{
+      position:fixed;
+      top:0;  
+      width:100vw;
+  }
+
+  h2{
+        font-size:20px;
+  }
+
+  .field{
+    padding:10px;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    margin:10px;
+    filter:none;
+  }
+
+  .title{
+  /* position:absolute;
+  top:30%; */
+  position:absolute;
+  top:10%;
+}
+
+  label{
+        margin-right:10px;
+}
+
+.end{
+        position:absolute;
+        top:50%;
+        left:7%;
+        backdrop-filter:blur(4px);
+        z-index:2000;
+        width:80%;
+        height:100%;
+        display:flex;
+        flex-direction:row;
+        justify-content:space-between;
+        overflow-x:hidden;
+}
+
+.top1{
+    position:absolute;
+    top:40%;
+    left:10%;
+}
+
+.top2{
+    position:absolute;
+    top:40%;
+    left:25%;
+}
+
 </style>
-    {% for question in questions %}
-        <div class="container">
-            {% for question in questions %}
-                <h2>
+
+            {# navbar #}
+            <nav class="bg-white border-gray-200 dark:bg-gray-900 nav">
+                <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                    <a href="https://flowbite.com/" class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="260" height="66" viewBox="0 0 260 66">
+                            <circle fill="#1A171B" cx="32.455" cy="32.665" r="32.455"></circle>
+                        <path fill="#FFF" d="M46.644 12.219c-3.297.115-6.175 1.932-8.317 4.446-2.372 2.756-3.95 6.025-5.087 9.362-2.034-1.667-3.603-3.825-6.866-4.766-2.522-.724-5.171-.425-7.607 1.39-1.154.862-1.949 2.165-2.327 3.39-.979 3.183 1.029 6.016 1.941 7.033l1.994 2.137c.411.419 1.401 1.512.917 3.079-.523 1.704-2.577 2.807-4.684 2.157-.941-.287-2.293-.988-1.99-1.975.125-.404.414-.706.569-1.055.142-.3.21-.525.253-.657.385-1.257-.141-2.892-1.487-3.307-1.256-.385-2.541-.08-3.039 1.537-.565 1.837.314 5.171 5.023 6.623 5.517 1.695 10.184-1.309 10.846-5.227.417-2.454-.691-4.277-2.721-6.622l-1.654-1.829c-1.002-1.001-1.346-2.707-.309-4.018.875-1.106 2.121-1.578 4.162-1.023 2.979.809 4.307 2.876 6.523 4.543-.915 3.001-1.513 6.013-2.054 8.714l-.33 2.014c-1.584 8.308-2.793 12.87-5.935 15.489-.633.45-1.538 1.124-2.902 1.171-.715.022-.946-.47-.956-.684-.017-.502.406-.732.687-.958.42-.229 1.055-.609 1.012-1.826-.046-1.438-1.237-2.685-2.959-2.628-1.29.044-3.256 1.258-3.182 3.48.077 2.295 2.216 4.015 5.441 3.906 1.724-.059 5.574-.761 9.368-5.271 4.416-5.17 5.651-11.097 6.58-15.435l1.037-5.727c.576.069 1.192.115 1.862.131 5.5.116 8.251-2.733 8.292-4.805.027-1.254-.823-2.488-2.013-2.46-.852.024-1.922.591-2.179 1.769-.251 1.156 1.75 2.199.186 3.212-1.111.719-3.103 1.226-5.908.814l.51-2.819c1.041-5.346 2.325-11.922 7.196-12.082.355-.018 1.654.016 1.684.875.009.287-.062.36-.398 1.017-.342.512-.471.948-.455 1.449.047 1.365 1.085 2.262 2.586 2.208 2.01-.065 2.588-2.022 2.555-3.027-.081-2.361-2.57-3.853-5.865-3.745z"></path>
+                        </svg>
+                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+                            My_quizz
+                        </span>
+                    </a>
+                    <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+                        <span class="sr-only">
+                            Open main menu
+                        </span>
+                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                        <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                            {% for item in items %}
+
+                                {% if item.route == 'app_logout' %}
+                                    {% if app.user %}
+                                        <div class="mb-3 popup">
+                                            You are logged in as 
+                                                                                                   
+                                                            
+                                            {{ app.user.userIdentifier }}
+                                            
+                                          </div>
+                                          <li>
+                                              <a href="{{ path('app_logout') }}" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">
+                                                  {{ item.title }}
+                                              </a>
+                                          </li>
+                                    {% endif %}
+                                {% else %}
+                                    <li>
+                                        <a href="{{ path(item.route) }}" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">
+                                            {{ item.title }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% else %}
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <h1 class="text-5xl font-bold p-20 title">Quizz : {{categorie.name }}<h1>
+                {% if question_id > count - 1 %}
+                <div class="end">
+            <h2 class="text-2xl font-bold p-20">Fin du quizz</div>
+        <a class="btn btn-outline btn-danger top1" href="{{ path('app_quizz_index') }}">Back to quizz index</a>
+    <a class="btn btn-outline btn-danger top2" href="{{ path('app_quizz_show', {'id': categorie.id,'question_id': question_id - 1,'reponse_id':3}) }}">previous</a>
+</div>        
+    {% else %}
+            <div class="categorie">
+            <div class="container index">
+
+                <h2 class="text-2xl font-bold p-20">
+
                     {{ question.question }}
                 </h2>
                 {# <a class="btn btn-outline btn-secondary" href="{{ path('app_quizz_show', {'id': categorie.id}) }}">start</a> #}
+
+                <form style="display:flex;flex-direction:column;" action="{{ path('app_quizz_show', {'id': categorie.id,'question_id': question_id + 1,'reponse_id':3}) }}" method="POST">
                 {% for reponse in question.reponses %}
-                    <p>
-                        {{ reponse.reponse }}
-                    </p>
+                <div class="field">
+                    <label class="text-1xl font-bold" for="{{reponse.id }}">{{reponse.reponse}}</label>
+                    <input class="form-control" type="radio" value="{{reponse.id}}" id="{{reponse.id}}" name="reponse_id">
+                </div>
                 {% endfor %}
-            {% endfor %}
+                <input type="submit" class="btn btn-outline btn-success">
+                <a class="btn btn-outline btn-secondary" href="{{ path('app_quizz_show', {'id': categorie.id,'question_id': question_id + 1,'reponse_id':3}) }}">next</a>
+                {% if question_id > 0 %}
+            <a class="btn btn-outline btn-danger" href="{{ path('app_quizz_show', {'id': categorie.id,'question_id': question_id - 1,'reponse_id':3}) }}">previous</a>
+                {% endif %}
+            </form>
+
+        {% endif %}
         </div>
-    {% endfor %}
+        </div>
 {% endblock %}
