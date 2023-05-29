@@ -1,34 +1,66 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Reponse{% endblock %}
+{% block title %}
+Reponse
+{% endblock %}
 
 {% block body %}
-    <h1 class="text-5xl font-bold p-20">Reponse</h1>
-<div class="overflow-x-auto pl-20 pr-20 pb-20">
-    <table class="table table-zebra w-full shadow-xl">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ reponse.id }}</td>
-            </tr>
-            <tr>
-                <th>IdQuestion</th>
-                <td>{{ reponse.question }}</td>
-            </tr>
-            <tr>
-                <th>Reponse</th>
-                <td>{{ reponse.reponse }}</td>
-            </tr>
-            <tr>
-                <th>ReponseExpected</th>
-                <td>{{ reponse.reponseExpected ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <a class="btn btn-outline btn-primary" href="{{ path('app_reponse_index') }}">back to list</a>
 
-    <a class="btn btn-outline btn-secondary" href="{{ path('app_reponse_edit', {'id': reponse.id}) }}">edit</a>
+    <h1 class="text-5xl font-bold p-20">
+        Reponse
+    </h1>
+    <div class="overflow-x-auto pl-20 pr-20 pb-20">
+        <table class="table table-zebra w-full shadow-xl">
+            <tbody>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <td>
+                        {{ reponse.id }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Question
+                    </th>
+                    <td>
+                        {{ reponse.question }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Reponse
+                    </th>
+                    <td>
+                        {{ reponse.reponse }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        ReponseExpected
+                    </th>
+                    <td>
+                        {{ reponse.reponseExpected ? 'Yes' : 'No' }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Actions
+                    </th>
+                    <td class="px-4 py-2" style="display:flex;flex-direction:row;justify-content:space-between;">
+                        <a class="btn btn-outline btn-primary" href="{{ path('app_reponse_index') }}">
+                            back to list
+                        </a>
 
-    {{ include('reponse/_delete_form.html.twig') }}
-</div>
+                        <a class="btn btn-outline btn-secondary" href="{{ path('app_reponse_edit', {'id': reponse.id}) }}">
+                            edit
+                        </a>
+
+                        {{ include('reponse/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
 {% endblock %}

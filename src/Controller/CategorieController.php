@@ -22,6 +22,25 @@ class CategorieController extends AbstractController
 
         return $this->render('categorie/index.html.twig', [
             'categories' => $categories,
+            'items' => [[
+                'route' => 'app_question_index',
+                'title' => 'Question'
+            ],[
+                'route' => 'app_categorie_index',
+                'title' => 'Category'
+            ],[
+                'route' => 'app_reponse_index',
+                'title' => 'Answer'
+            ],[
+                'route' => 'app_user_index',
+                'title' => 'User'
+            ],[
+                'route' => 'app_quizz_index',
+                'title' => 'Quizz'
+            ],[
+                'route' => 'app_logout',
+                'title' => 'Logout'
+            ]],
         ]);
     }
 
@@ -42,6 +61,25 @@ class CategorieController extends AbstractController
         return $this->renderForm('categorie/new.html.twig', [
             'categorie' => $categorie,
             'form' => $form,
+            'items' => [[
+                'route' => 'app_question_index',
+                'title' => 'Question'
+            ],[
+                'route' => 'app_categorie_index',
+                'title' => 'Category'
+            ],[
+                'route' => 'app_reponse_index',
+                'title' => 'Answer'
+            ],[
+                'route' => 'app_user_index',
+                'title' => 'User'
+            ],[
+                'route' => 'app_quizz_index',
+                'title' => 'Quizz'
+            ],[
+                'route' => 'app_logout',
+                'title' => 'Logout'
+            ]],
         ]);
     }
 
@@ -68,6 +106,25 @@ class CategorieController extends AbstractController
         return $this->renderForm('categorie/edit.html.twig', [
             'categorie' => $categorie,
             'form' => $form,
+            'items' => [[
+                'route' => 'app_question_index',
+                'title' => 'Question'
+            ],[
+                'route' => 'app_categorie_index',
+                'title' => 'Category'
+            ],[
+                'route' => 'app_reponse_index',
+                'title' => 'Answer'
+            ],[
+                'route' => 'app_user_index',
+                'title' => 'User'
+            ],[
+                'route' => 'app_quizz_index',
+                'title' => 'Quizz'
+            ],[
+                'route' => 'app_logout',
+                'title' => 'Logout'
+            ]],
         ]);
     }
 

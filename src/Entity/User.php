@@ -49,6 +49,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToMany(targetEntity: Reponse::class, inversedBy: 'users')]
     private Collection $reponses;
+
+    #[ORM\ManyToMany(targetEntity: History::class, mappedBy: 'user')]
+    private Collection $histories;
     public function __construct() 
     {
         $date = new \DateTimeImmutable();
@@ -58,6 +61,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->setIsActive(0);
         $this->setIsAdmin(0);
         $this->setIsVerified(0);
+        $this->reponses = new ArrayCollection();
+        $this->histories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -219,15 +224,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
-
-    public function serialize()
+    /**
+     * @return Collection<int, Reponse>
+     */
+    public function getReponses(): Collection
     {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt,
-        ));
+        return $this->reponses;
     }
+
+    /**
+     * @return Collection<int, History>
+     */
+    public function getHistories(): Collection
+    {
+        return $this->histories;
+    }
+
+    public function addHistory(History $history): self
+    {
+        if (!$this->histories->contains($history)) {
+            $this->histories->add($history);
+            $history->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistory(History $history): self
+    {
+        if ($this->histories->removeElement($history)) {
+            $history->removeUser($this);
+        }
+
+        return $this;
+    }
+
+
+
+
+ 
 }
